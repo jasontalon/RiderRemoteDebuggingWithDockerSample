@@ -1,0 +1,12 @@
+version: "3"
+services:
+  api:
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - "8999:80"
+      - "5255:5255"
+    restart: unless-stopped
+    volumes:
+      - "./WebApplication1DockerRemoteDebugging/bin/Debug/net6.0:/app"
+    command: ["concurrently", "../debugger/DebuggerAgent -port=5255", "dotnet WebApplication1DockerRemoteDebugging.dll"]
